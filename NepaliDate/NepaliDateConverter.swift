@@ -4,6 +4,7 @@ struct NepaliDate {
     var year: Int
     var month: Int
     var day: Int
+    var weekDay: String // Nepali short day name
     
     var monthName: String {
         let months = [
@@ -15,22 +16,26 @@ struct NepaliDate {
     }
     
     var formatted: String {
-        return "\(day) \(monthName) \(year)"
+        return "\(day) \(monthName) \(year), \(weekDay)"
     }
 }
 
 class NepaliDateConverter {
     
-    // Epoch: 1 Baisakh 2000 BS = 13 April 1943 AD
-    // JS Date uses 0-indexed months, so 1943-03-13 means April 13th?
-    // Let's verify standard JS Date(1943, 3, 13). Month 3 is April.
-    // So 13 April 1943.
+    // Epoch: 1 Baisakh 2000 BS = 14 April 1943 AD
+    private static let englishEpoch = Calendar.current.date(from: DateComponents(year: 1943, month: 4, day: 14))!
     
-    private static let englishEpoch = Calendar.current.date(from: DateComponents(year: 1943, month: 4, day: 13))!
+    private static let nepaliDays = ["आइत", "सोम", "मंगल", "बुध", "बिहि", "शुक्र", "शनि"]
     
     static func toNepaliDate(from date: Date) -> NepaliDate {
         let calendar = Calendar.current
         let daysPassed = calendar.dateComponents([.day], from: englishEpoch, to: date).day ?? 0
+        
+        // Calculate Weekday
+        // 1 = Sunday, ... 7 = Saturday
+        let weekdayIndex = calendar.component(.weekday, from: date) 
+        // Array is 0-indexed. weekdayIndex 1 (Sun) -> index 0
+        let weekDayName = nepaliDays[weekdayIndex - 1]
         
         var currentDays = daysPassed
         var currentYear = 2000
@@ -38,20 +43,10 @@ class NepaliDateConverter {
         // Loop through years
         while true {
             guard let daysInMonths = lookupTable[currentYear] else {
-                // If out of range, just return a default or break
-                return NepaliDate(year: currentYear, month: 1, day: 1)
+                return NepaliDate(year: currentYear, month: 1, day: 1, weekDay: weekDayName)
             }
             
             let daysInYear = daysInMonths.reduce(0, +)
-            
-            // Note: The logic in JS seems to treat day 1 as 1 day passed?
-            // "If the daysPassed is on the date 2000/01/01 then it will be 1" (JS comment line 1480, but implementation seems different)
-            // Let's look at JS `mapDaysToDate`:
-            // It searches for year where daysPassed > year.completedDays (cumulative)
-            // My daysPassed is 0-indexed distance from epoch?
-            // If date is same as epoch, daysPassed is 0.
-            // If I am at 0 days passed... that is 1st Baisakh.
-            // So if currentDays < daysInYear, we are in this year.
             
             if currentDays < daysInYear {
                 break
@@ -63,7 +58,7 @@ class NepaliDateConverter {
         
         // Loop through months
         guard let daysInMonths = lookupTable[currentYear] else {
-             return NepaliDate(year: currentYear, month: 1, day: 1)
+             return NepaliDate(year: currentYear, month: 1, day: 1, weekDay: weekDayName)
         }
         
         var currentMonth = 0 // 0-indexed for array access
@@ -75,15 +70,7 @@ class NepaliDateConverter {
             currentMonth += 1
         }
         
-        // currentDays is remaining days. Since we started partial days as 0 = 1st day.
-        // wait, let's trace:
-        // Epoch: 13 April. Input: 13 April. daysPassed = 0.
-        // currentDays = 0.
-        // Loop months: daysInMonth (say 30). 0 < 30. Break.
-        // currentMonth = 0.
-        // Result: Year 2000, Month 0+1=1, Day 0+1=1. Correct.
-        
-        return NepaliDate(year: currentYear, month: currentMonth + 1, day: currentDays + 1)
+        return NepaliDate(year: currentYear, month: currentMonth + 1, day: currentDays + 1, weekDay: weekDayName)
     }
 
     // Lookup Table: BS Year -> [Days in Baisakh, ..., Days in Chaitra]

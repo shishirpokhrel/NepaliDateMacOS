@@ -3,15 +3,15 @@ set -e
 
 APP_NAME="NepaliDate"
 SCHEME="NepaliDate"
-BUILD_DIR="build_artifacts"
+BUILD_DIR="build_artifacts_clean"
 PKG_NAME="NepaliDate.pkg"
 
 echo "Cleaning previous build..."
 rm -rf "$BUILD_DIR"
 rm -f "$PKG_NAME"
 
-echo "Cleaning extended attributes (skipping .git)..."
-find . -type f -not -path "./.git/*" -exec xattr -c {} +
+echo "Cleaning extended attributes (skipping .git and build artifacts)..."
+find . -type f -not -path "./.git/*" -not -path "./build_artifacts*" -exec xattr -c {} +
 
 echo "Building $APP_NAME..."
 # Build for Release
@@ -31,6 +31,9 @@ if [ ! -d "$APP_PATH" ]; then
     exit 1
 fi
 
+echo "Configuring Info.plist..."
+plutil -replace LSUIElement -bool YES "$APP_PATH/Contents/Info.plist"
+
 echo "Cleaning built app attributes and signing ad-hoc..."
 xattr -rc "$APP_PATH"
 codesign --force --deep --sign - "$APP_PATH"
@@ -39,6 +42,10 @@ echo "Creating Package..."
 # Create the package
 pkgbuild --install-location /Applications --component "$APP_PATH" "$PKG_NAME"
 
+echo "Copying App to Desktop for easy access..."
+cp -R "$APP_PATH" "/Users/shishirpokhrel/Desktop/$APP_NAME.app"
+
 echo "------------------------------------------------"
 echo "Package created successfully: $PWD/$PKG_NAME"
+echo "App copied to Desktop: /Users/shishirpokhrel/Desktop/$APP_NAME.app"
 echo "------------------------------------------------"
