@@ -21,6 +21,18 @@ struct NepaliDateApp: App {
                 updateDate()
             }
             Divider()
+            
+            Menu("About Author") {
+                Text("Dev: Shishir Pokhrel")
+                Text("Created: Jan 24, 2026")
+                Button("LinkedIn Profile") {
+                    if let url = URL(string: "https://www.linkedin.com/in/shishirpokhrelqaengineer/") {
+                        NSWorkspace.shared.open(url)
+                    }
+                }
+            }
+            
+            Divider()
             Button("Quit") {
                 NSApplication.shared.terminate(nil)
             }

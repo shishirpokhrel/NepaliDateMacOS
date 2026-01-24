@@ -10,8 +10,8 @@ echo "Cleaning previous build..."
 rm -rf "$BUILD_DIR"
 rm -f "$PKG_NAME"
 
-echo "Cleaning extended attributes..."
-xattr -rc .
+echo "Cleaning extended attributes (skipping .git)..."
+find . -type f -not -path "./.git/*" -exec xattr -c {} +
 
 echo "Building $APP_NAME..."
 # Build for Release
