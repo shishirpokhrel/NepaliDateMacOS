@@ -49,7 +49,7 @@ struct ConverterView: View {
                             convertedBsDateStr = "Invalid Date"
                         }
                     }
-                    .buttonStyle(.borderedProminent)
+                    .padding(.top, 5) // Add some padding instead
                     
                     ResultView(title: "Nepali Date (BS)", result: convertedBsDateStr)
                 }
@@ -74,7 +74,7 @@ struct ConverterView: View {
                             convertedAdDateStr = "Invalid Date"
                         }
                     }
-                    .buttonStyle(.borderedProminent)
+                    .padding(.top, 5) // Add some padding instead
                     
                     ResultView(title: "English Date (AD)", result: convertedAdDateStr)
                 }
@@ -97,11 +97,19 @@ struct InputField: View {
     @Binding var value: Int
     let width: CGFloat
     
+    // Create a static formatter to avoid recreation
+    static let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .none
+        formatter.usesGroupingSeparator = false
+        return formatter
+    }()
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text(title).font(.caption)
-            TextField(title, value: $value, format: .number.grouping(.never))
-                .textFieldStyle(.roundedBorder)
+            TextField(title, value: $value, formatter: Self.numberFormatter)
+                .textFieldStyle(RoundedBorderTextFieldStyle()) // Explicit style for older OS
                 .frame(width: width)
         }
     }
