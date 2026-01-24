@@ -1,11 +1,19 @@
 import SwiftUI
 
 struct CalendarView: View {
-    let bsDate: NepaliDate
+    @State var currentYear: Int = 2082 // Default
+    @State var currentMonth: Int = 1
+    @State var selectedDay: Int = 1
+    
+    let initialDate: NepaliDate
+    
+    init(bsDate: NepaliDate) {
+        self.initialDate = bsDate
+    }
     
     // Grid layout
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
-    let weekDays = ["आ", "सो", "मं", "बु", "बि", "शु", "श"] // Shortened as per reference
+    let weekDays = ["आ", "सो", "मं", "बु", "बि", "शु", "श"]
     
     // Helper to convert to Devanagari
     func toDevanagari(_ number: Int) -> String {
@@ -14,12 +22,10 @@ struct CalendarView: View {
         return formatter.string(from: NSNumber(value: number)) ?? "\(number)"
     }
     
-    // Helper for English Month Range (e.g., "Jan/Feb '26")
+    // Helper for English Month Range
     var englishMonthRange: String {
-        // Start date AD
-        let startAd = NepaliDateConverter.toEnglishDate(year: bsDate.year, month: bsDate.month, day: 1) ?? Date()
-        // End date AD (rough approx + 30 days)
-        let endAd = Calendar.current.date(byAdding: .day, value: 25, to: startAd)! // A few days into next English month usually
+        let startAd = NepaliDateConverter.toEnglishDate(year: currentYear, month: currentMonth, day: 1) ?? Date()
+        let endAd = Calendar.current.date(byAdding: .day, value: 25, to: startAd)!
         
         let fmt = DateFormatter()
         fmt.dateFormat = "MMM"
@@ -36,40 +42,95 @@ struct CalendarView: View {
         }
     }
     
+    var monthName: String {
+        let months = [
+            "Baisakh", "Jestha", "Asar", "Shrawan", "Bhadra", "Aswin",
+            "Kartik", "Mangsir", "Poush", "Magh", "Falgun", "Chaitra"
+        ]
+        if currentMonth >= 1 && currentMonth <= 12 {
+            return months[currentMonth - 1]
+        }
+        return ""
+    }
+    
+    func changeMonth(by value: Int) {
+        var newMonth = currentMonth + value
+        var newYear = currentYear
+        
+        if newMonth > 12 {
+            newMonth = 1
+            newYear += 1
+        } else if newMonth < 1 {
+            newMonth = 12
+            newYear -= 1
+        }
+        
+        // Clamp year support (2000-2090)
+        if newYear >= 2000 && newYear <= 2090 {
+            currentYear = newYear
+            currentMonth = newMonth
+            // Reset selected day only if valid for new month? 
+            // Better to keep it unless meaningful, but user just wants nav.
+            // Let's keep it but it won't highlight "Today" accurately if we navigate away.
+             // Actually, "Today" highlighting should be based on real date, not navigated date.
+             // But for now, let's just update the view.
+        }
+    }
+    
     var body: some View {
         VStack(spacing: 12) {
             // Header
             HStack {
-                Text("\(bsDate.monthName) \(toDevanagari(bsDate.year))")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color(red: 0.4, green: 0.8, blue: 0.2)) // Greenish
+                Button(action: { changeMonth(by: -1) }) {
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(.gray)
+                }
+                .buttonStyle(PlainButtonStyle())
                 
-                Text(englishMonthRange)
-                    .font(.title3)
-                    .foregroundColor(.gray)
+                Spacer()
+                
+                VStack(spacing: 0) {
+                     Text("\(monthName) \(toDevanagari(currentYear))")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color(red: 0.4, green: 0.8, blue: 0.2))
+                    
+                    Text(englishMonthRange)
+                        .font(.caption) // Smaller for secondary info
+                        .foregroundColor(.gray)
+                }
+                
+                Spacer()
+                
+                Button(action: { changeMonth(by: 1) }) {
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(.gray)
+                }
+                .buttonStyle(PlainButtonStyle())
             }
             .padding(.top, 10)
+            .padding(.horizontal)
             
             // Weekday Headers
             LazyVGrid(columns: columns, spacing: 10) {
                 ForEach(Array(weekDays.enumerated()), id: \.offset) { index, day in
                     Text(day)
                         .font(.body)
-                        .foregroundColor(index == 6 ? .red : .primary) // Saturday Red
+                        .foregroundColor(index == 6 ? .red : .primary)
                 }
             }
             .padding(.horizontal)
             
             // Days Grid
-            LazyVGrid(columns: columns, spacing: 0) { // Tighter spacing
-                let daysInMonth = NepaliDateConverter.getDaysInMonth(year: bsDate.year, month: bsDate.month)
-                let startAdDate = NepaliDateConverter.toEnglishDate(year: bsDate.year, month: bsDate.month, day: 1) ?? Date()
-                let startWeekday = Calendar.current.component(.weekday, from: startAdDate) // 1=Sun
+            LazyVGrid(columns: columns, spacing: 0) {
+                let daysInMonth = NepaliDateConverter.getDaysInMonth(year: currentYear, month: currentMonth)
+                let startAdDate = NepaliDateConverter.toEnglishDate(year: currentYear, month: currentMonth, day: 1) ?? Date()
+                let startWeekday = Calendar.current.component(.weekday, from: startAdDate)
                 
-                // Empty slots
-                ForEach(0..<(startWeekday - 1), id: \.self) { _ in
+                // Empty slots - Fix ID conflict by using unique string IDs
+                ForEach(0..<(startWeekday - 1), id: \.self) { index in
                     Text("")
+                        .id("empty_\(index)")
                 }
                 
                 // Days
@@ -78,7 +139,9 @@ struct CalendarView: View {
                     let adDay = Calendar.current.component(.day, from: currentAdDate)
                     let weekday = Calendar.current.component(.weekday, from: currentAdDate)
                     let isSaturday = weekday == 7
-                    let isToday = day == bsDate.day // Highlighting "selected" date from input, ideally should be Today check
+                    
+                    // Highlighting: Check against ACTUAL today, not just initial state
+                    let isToday = (day == selectedDay && currentMonth == initialDate.month && currentYear == initialDate.year)
                     
                     VStack(spacing: -2) {
                         Text(toDevanagari(day))
@@ -113,6 +176,11 @@ struct CalendarView: View {
             .padding(.bottom, 15)
         }
         .frame(width: 320)
-        .background(Color(NSColor.windowBackgroundColor)) // Match popup background
+        .background(Color(NSColor.windowBackgroundColor))
+        .onAppear {
+            currentYear = initialDate.year
+            currentMonth = initialDate.month
+            selectedDay = initialDate.day
+        }
     }
 }

@@ -26,9 +26,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         popover = NSPopover()
         popover.contentSize = NSSize(width: 320, height: 350)
         popover.behavior = .transient
-        // Inject CalendarView with current date
-        let bsDate = NepaliDateConverter.toNepaliDate(from: Date())
-        popover.contentViewController = NSHostingController(rootView: CalendarView(bsDate: bsDate))
+        // Initial setup
+        resetToToday()
         
         // Start Timer to update button title (every 60s as backup)
         timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
@@ -40,7 +39,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func dayChanged(_ notification: Notification) {
-        updateDateTitle()
+        // On midnight, reset everything including the view
+        resetToToday()
     }
 
     
@@ -48,11 +48,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let button = statusItem.button {
             let bsDate = NepaliDateConverter.toNepaliDate(from: Date())
             button.title = bsDate.formatted
-            
-            // Update popover content too if needed (simplification: re-create or use observable object)
-            // Ideally, pass an observable object to CalendarView. For now, this is static until reopened.
-            popover.contentViewController = NSHostingController(rootView: CalendarView(bsDate: bsDate))
+            // Do NOT reset popover here, as it kills user navigation
         }
+    }
+    
+    func resetToToday() {
+        updateDateTitle()
+        // Reset popover content to today
+        let bsDate = NepaliDateConverter.toNepaliDate(from: Date())
+        popover.contentViewController = NSHostingController(rootView: CalendarView(bsDate: bsDate))
     }
     
     @objc func statusBarButtonClicked(_ sender: NSStatusBarButton) {

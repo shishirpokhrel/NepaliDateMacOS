@@ -22,8 +22,8 @@ struct NepaliDate {
 
 class NepaliDateConverter {
     
-    // Epoch: 1 Baisakh 2000 BS = 13 April 1943 AD (Shifted to align with user feedback)
-    private static let englishEpoch = Calendar.current.date(from: DateComponents(year: 1943, month: 4, day: 13))!
+    // Epoch calibrated to Leapfrog data: 1 Baisakh 2000 BS = 14 April 1943 AD
+    private static let englishEpoch = Calendar.current.date(from: DateComponents(year: 1943, month: 4, day: 14))!
     
     private static let nepaliDays = ["आइत", "सोम", "मंगल", "बुध", "बिहि", "शुक्र", "शनि"]
     
@@ -33,18 +33,15 @@ class NepaliDateConverter {
         let startOfTarget = calendar.startOfDay(for: date)
         let daysPassed = calendar.dateComponents([.day], from: startOfEpoch, to: startOfTarget).day ?? 0
         
-        // Calculate Weekday
-        // 1 = Sunday, ... 7 = Saturday
         let weekdayIndex = calendar.component(.weekday, from: date) 
-        // Array is 0-indexed. weekdayIndex 1 (Sun) -> index 0
         let weekDayName = nepaliDays[weekdayIndex - 1]
         
         var currentDays = daysPassed
         var currentYear = 2000
         
-        // Loop through years
         while true {
             guard let daysInMonths = lookupTable[currentYear] else {
+                // If year > 2090, keep calculating roughly or return fixed
                 return NepaliDate(year: currentYear, month: 1, day: 1, weekDay: weekDayName)
             }
             
@@ -58,12 +55,11 @@ class NepaliDateConverter {
             currentYear += 1
         }
         
-        // Loop through months
         guard let daysInMonths = lookupTable[currentYear] else {
              return NepaliDate(year: currentYear, month: 1, day: 1, weekDay: weekDayName)
         }
         
-        var currentMonth = 0 // 0-indexed for array access
+        var currentMonth = 0
         for daysInMonth in daysInMonths {
             if currentDays < daysInMonth {
                 break
@@ -76,37 +72,32 @@ class NepaliDateConverter {
     }
     
     static func toEnglishDate(year: Int, month: Int, day: Int) -> Date? {
-        // Validate inputs roughly
         guard year >= 2000, month >= 1, month <= 12, day >= 1 else { return nil }
         
         var totalDays = 0
         
-        // Add days for full years
         for y in 2000..<year {
             guard let daysInMonths = lookupTable[y] else { return nil }
             totalDays += daysInMonths.reduce(0, +)
         }
         
-        // Add days for full months in current year
         guard let daysInMonths = lookupTable[year] else { return nil }
-        // Validate month doesn't exceed array (though guard above checks 1-12)
         
         for m in 0..<(month - 1) {
             totalDays += daysInMonths[m]
         }
         
-        // Validate day doesn't exceed days in that month
         if day > daysInMonths[month - 1] {
             return nil
         }
         
-        // Add days in current month
         totalDays += (day - 1)
         
         return Calendar.current.date(byAdding: .day, value: totalDays, to: englishEpoch)
     }
 
     // Lookup Table: BS Year -> [Days in Baisakh, ..., Days in Chaitra]
+    // Calibrated from Leapfrog Technology Nepali Date Picker Source
     private static let lookupTable: [Int: [Int]] = [
         2000: [30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31],
         2001: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30],
@@ -127,7 +118,7 @@ class NepaliDateConverter {
         2016: [31, 31, 31, 32, 31, 31, 29, 30, 30, 29, 30, 30],
         2017: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30],
         2018: [31, 32, 31, 32, 31, 30, 30, 29, 30, 29, 30, 30],
-        2019: [31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31],
+        2019: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31],
         2020: [31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30],
         2021: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30],
         2022: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 30],
@@ -158,7 +149,7 @@ class NepaliDateConverter {
         2047: [31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30],
         2048: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30],
         2049: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 30],
-        2050: [31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31],
+        2050: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31],
         2051: [31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30],
         2052: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30],
         2053: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 30],
@@ -189,13 +180,13 @@ class NepaliDateConverter {
         2078: [31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30],
         2079: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30],
         2080: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 30],
-        2081: [31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 31],
-        2082: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30],
-        2083: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30],
-        2084: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31],
-        2085: [30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31],
-        2086: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30],
-        2087: [31, 31, 32, 31, 31, 31, 30, 29, 30, 30, 30, 30],
+        2081: [31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31],
+        2082: [30, 32, 31, 32, 31, 31, 30, 30, 29, 30, 30, 30],
+        2083: [31, 31, 32, 31, 31, 31, 30, 30, 29, 30, 30, 30],
+        2084: [31, 31, 32, 31, 31, 31, 30, 30, 29, 30, 30, 30],
+        2085: [31, 32, 31, 32, 30, 31, 30, 30, 29, 30, 30, 30],
+        2086: [30, 32, 31, 32, 31, 31, 30, 30, 29, 30, 30, 30],
+        2087: [31, 31, 32, 31, 31, 30, 30, 30, 29, 30, 30, 30],
         2088: [30, 31, 32, 32, 30, 31, 30, 30, 29, 30, 30, 30],
         2089: [30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30],
         2090: [30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30]
@@ -203,7 +194,7 @@ class NepaliDateConverter {
     
     static func getDaysInMonth(year: Int, month: Int) -> Int {
         guard let daysInMonths = lookupTable[year], month >= 1, month <= 12 else {
-            return 32 // Fallback to max to avoid blocking, or 30?
+            return 32 // Fallback
         }
         return daysInMonths[month - 1]
     }

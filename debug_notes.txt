@@ -1,0 +1,63 @@
+
+import Foundation
+
+// Paste the relevant parts of NepaliDateConverter or import the file if possible (hard in single script mode unless I copy paste the whole class)
+// Since I can't import the app module easily in a standalone script, I'll copy the minimal logic to reproduce.
+
+// ... But wait, I can just use the swift interpreter if I copy the file content or cat it.
+// Better: create a swift file that includes the logic or inspects it.
+
+// Let's create a test harness that compiles with the existing file.
+print("Epoch Test")
+let englishEpoch = Calendar.current.date(from: DateComponents(year: 1943, month: 4, day: 13))!
+print("Epoch: \(englishEpoch)")
+
+// I suspect the issue is simply that `toEnglishDate` relies on `lookupTable` which might be fine,
+// but the "missing days" visually might be because of a layout issue? 
+// If "1-3" are missing, maybe the cells are white on white? Or pushed off screen?
+// Or maybe `ForEach` is failing?
+
+// But user claims "date of current month is showing from 4 to 29". 
+// 29? Is the month length 29?
+// If it shows 4..29, that means 1,2,3 are missing.
+// 29 - 4 + 1 = 26 days showed?
+// If the month has 29 days, and 1,2,3 are missing...
+// Maybe the `bsDate.day` (which is `11` today) is somehow relevant? No, that's just for highlighting.
+
+// Wait, looking at `CalendarView.swift`:
+/*
+66:                 let daysInMonth = NepaliDateConverter.getDaysInMonth(year: bsDate.year, month: bsDate.month)
+67:                 let startAdDate = NepaliDateConverter.toEnglishDate(year: bsDate.year, month: bsDate.month, day: 1) ?? Date()
+68:                 let startWeekday = Calendar.current.component(.weekday, from: startAdDate) // 1=Sun
+*/
+
+// If `daysInMonth` is say 29.
+// And 1,2,3 are not shown. 
+// Maybe the loop `ForEach(1...daysInMonth)` is not running for 1,2,3? Impossible. `1...29` definitely includes 1,2,3.
+// Maybe `LazyVGrid` is cutting them off?
+// Maybe the "Empty slots" logic is adding too many empty slots and pushing 1,2,3 out?
+// Or pushing them to a previous row that isn't visible?
+
+// Ah! `ForEach(0..<(startWeekday - 1))`
+// If `startWeekday` is 1 (Sun), range 0..<0 (Empty). First day is at index 0.
+// If `startWeekday` is 4 (Wed), range 0..<3. 3 empty slots. Day 1 is at index 3.
+// This matches standard logic.
+
+// BUT, what if `startWeekday` calculation is wrong because `toEnglishDate` is wrong?
+// If `toEnglishDate` returns `nil`, it defaults to `Date()` (Today).
+// If `Date()` is Jan 25. Weekday is Sunday (1).
+// So it would start filling from slot 0.
+// But today is Magh 11. 
+// If it defaulted to today, it would show 1...daysInMonth starting at Sunday. It wouldn't hide 1,2,3.
+
+// Is it possible the text color for 1,2,3 is invisible? 
+// Colors: `foregroundColor(isSaturday ? .red : .primary)`
+// If 1,2,3 are somehow Saturday? No, only one day is Saturday per week.
+
+// What if the frame is too small?
+// `frame(width: 320)`
+// `LazyVGrid` could overflow?
+// `VStack` spacing?
+
+// Let's create a Swift script to calculate what `toEnglishDate` returns for Magh 1, 2082.
+// And print the grid it would generate.
