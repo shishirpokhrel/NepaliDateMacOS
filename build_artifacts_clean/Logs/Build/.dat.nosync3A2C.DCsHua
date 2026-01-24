@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>12</integer>
+	<key>logs</key>
+	<dict>
+		<key>9FF7BA12-2174-4599-93F9-8D21DD87DDF8</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>9FF7BA12-2174-4599-93F9-8D21DD87DDF8.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>4</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>NepaliDate project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>NepaliDate</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project NepaliDate with scheme NepaliDate and configuration Release</string>
+			<key>timeStartedRecording</key>
+			<real>790966447.65203702</real>
+			<key>timeStoppedRecording</key>
+			<real>790966455.10580397</real>
+			<key>title</key>
+			<string>Building project NepaliDate with scheme NepaliDate and configuration Release</string>
+			<key>uniqueIdentifier</key>
+			<string>9FF7BA12-2174-4599-93F9-8D21DD87DDF8</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
