@@ -1,0 +1,12 @@
+{
+  "/Users/shishirpokhrel/Desktop/NepaliDate/NepaliDate/ContentView.swift" : {
+    "abi-baseline-json" : "/Users/shishirpokhrel/Desktop/NepaliDate/build_artifacts/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/NepaliDate.abi.json",
+    "const-values" : "/Users/shishirpokhrel/Desktop/NepaliDate/build_artifacts/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/NepaliDate-primary.swiftconstvalues",
+    "dependencies" : "/Users/shishirpokhrel/Desktop/NepaliDate/build_artifacts/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/NepaliDate-primary.d",
+    "diagnostics" : "/Users/shishirpokhrel/Desktop/NepaliDate/build_artifacts/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/NepaliDate-primary.dia",
+    "objc-header" : "/Users/shishirpokhrel/Desktop/NepaliDate/build_artifacts/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/NepaliDate-Swift.h",
+    "swiftdoc" : "/Users/shishirpokhrel/Desktop/NepaliDate/build_artifacts/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/NepaliDate.swiftdoc",
+    "swiftmodule" : "/Users/shishirpokhrel/Desktop/NepaliDate/build_artifacts/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/NepaliDate.swiftmodule",
+    "swiftsourceinfo" : "/Users/shishirpokhrel/Desktop/NepaliDate/build_artifacts/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/NepaliDate.swiftsourceinfo"
+  }
+}
