@@ -310,6 +310,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 SWIFT_CLASS("_TtC10NepaliDate11AppDelegate")
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 - (void)applicationDidFinishLaunching:(NSNotification * _Nonnull)notification;
+- (void)dayChanged:(NSNotification * _Nonnull)notification;
 - (void)statusBarButtonClicked:(NSStatusBarButton * _Nonnull)sender;
 - (void)openConverter;
 - (void)openLinkedIn;

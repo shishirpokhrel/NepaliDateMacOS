@@ -88,6 +88,15 @@ struct ConverterView: View {
         }
         .padding()
         .frame(width: 400, height: 400)
+        .onAppear {
+            // Reset to current date every time view appears
+            if conversionMode == 0 {
+                 let now = Date()
+                 adYear = Calendar.current.component(.year, from: now)
+                 adMonth = Calendar.current.component(.month, from: now)
+                 adDay = Calendar.current.component(.day, from: now)
+            }
+        }
     }
 }
 

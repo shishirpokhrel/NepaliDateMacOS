@@ -22,14 +22,16 @@ struct NepaliDate {
 
 class NepaliDateConverter {
     
-    // Epoch: 1 Baisakh 2000 BS = 14 April 1943 AD
-    private static let englishEpoch = Calendar.current.date(from: DateComponents(year: 1943, month: 4, day: 14))!
+    // Epoch: 1 Baisakh 2000 BS = 13 April 1943 AD (Shifted to align with user feedback)
+    private static let englishEpoch = Calendar.current.date(from: DateComponents(year: 1943, month: 4, day: 13))!
     
     private static let nepaliDays = ["आइत", "सोम", "मंगल", "बुध", "बिहि", "शुक्र", "शनि"]
     
     static func toNepaliDate(from date: Date) -> NepaliDate {
         let calendar = Calendar.current
-        let daysPassed = calendar.dateComponents([.day], from: englishEpoch, to: date).day ?? 0
+        let startOfEpoch = calendar.startOfDay(for: englishEpoch)
+        let startOfTarget = calendar.startOfDay(for: date)
+        let daysPassed = calendar.dateComponents([.day], from: startOfEpoch, to: startOfTarget).day ?? 0
         
         // Calculate Weekday
         // 1 = Sunday, ... 7 = Saturday

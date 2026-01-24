@@ -30,11 +30,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let bsDate = NepaliDateConverter.toNepaliDate(from: Date())
         popover.contentViewController = NSHostingController(rootView: CalendarView(bsDate: bsDate))
         
-        // Start Timer to update button title
+        // Start Timer to update button title (every 60s as backup)
         timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
             self?.updateDateTitle()
         }
+        
+        // Observe system day change (Midnight)
+        NotificationCenter.default.addObserver(self, selector: #selector(dayChanged), name: .NSCalendarDayChanged, object: nil)
     }
+    
+    @objc func dayChanged(_ notification: Notification) {
+        updateDateTitle()
+    }
+
     
     func updateDateTitle() {
         if let button = statusItem.button {
