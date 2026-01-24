@@ -42,5 +42,7 @@
 	<string>17C52</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>26.2</string>
+	<key>LSUIElement</key>
+	<true/>
 </dict>
 </plist>

@@ -8,10 +8,25 @@
     "pch" : "/Users/shishirpokhrel/Desktop/NepaliDate/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/NepaliDate-primary-Bridging-header.pch",
     "swift-dependencies" : "/Users/shishirpokhrel/Desktop/NepaliDate/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/NepaliDate-primary.swiftdeps"
   },
+  "/Users/shishirpokhrel/Desktop/NepaliDate/NepaliDate/AppDelegate.swift" : {
+    "index-unit-output-path" : "/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/AppDelegate.o",
+    "llvm-bc" : "/Users/shishirpokhrel/Desktop/NepaliDate/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/AppDelegate.bc",
+    "object" : "/Users/shishirpokhrel/Desktop/NepaliDate/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/AppDelegate.o"
+  },
+  "/Users/shishirpokhrel/Desktop/NepaliDate/NepaliDate/CalendarView.swift" : {
+    "index-unit-output-path" : "/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/CalendarView.o",
+    "llvm-bc" : "/Users/shishirpokhrel/Desktop/NepaliDate/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/CalendarView.bc",
+    "object" : "/Users/shishirpokhrel/Desktop/NepaliDate/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/CalendarView.o"
+  },
   "/Users/shishirpokhrel/Desktop/NepaliDate/NepaliDate/ContentView.swift" : {
     "index-unit-output-path" : "/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/ContentView.o",
     "llvm-bc" : "/Users/shishirpokhrel/Desktop/NepaliDate/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/ContentView.bc",
     "object" : "/Users/shishirpokhrel/Desktop/NepaliDate/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/ContentView.o"
+  },
+  "/Users/shishirpokhrel/Desktop/NepaliDate/NepaliDate/ConverterView.swift" : {
+    "index-unit-output-path" : "/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/ConverterView.o",
+    "llvm-bc" : "/Users/shishirpokhrel/Desktop/NepaliDate/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/ConverterView.bc",
+    "object" : "/Users/shishirpokhrel/Desktop/NepaliDate/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/ConverterView.o"
   },
   "/Users/shishirpokhrel/Desktop/NepaliDate/NepaliDate/NepaliDateApp.swift" : {
     "index-unit-output-path" : "/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/NepaliDateApp.o",

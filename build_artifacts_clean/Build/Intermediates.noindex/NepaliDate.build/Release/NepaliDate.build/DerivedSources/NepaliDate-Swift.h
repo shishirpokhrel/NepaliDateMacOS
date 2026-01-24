@@ -281,6 +281,8 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import AppKit;
+@import ObjectiveC;
 #endif
 
 #endif
@@ -302,6 +304,18 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 #if defined(__OBJC__)
+
+@class NSNotification;
+@class NSStatusBarButton;
+SWIFT_CLASS("_TtC10NepaliDate11AppDelegate")
+@interface AppDelegate : NSObject <NSApplicationDelegate>
+- (void)applicationDidFinishLaunching:(NSNotification * _Nonnull)notification;
+- (void)statusBarButtonClicked:(NSStatusBarButton * _Nonnull)sender;
+- (void)openConverter;
+- (void)openLinkedIn;
+- (void)quitApp;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
 
 #endif
 #if __has_attribute(external_source_symbol)

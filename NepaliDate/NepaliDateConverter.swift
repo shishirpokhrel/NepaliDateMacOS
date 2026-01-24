@@ -16,7 +16,7 @@ struct NepaliDate {
     }
     
     var formatted: String {
-        return "\(day) \(monthName) \(year), \(weekDay)"
+        return "\(day) \(monthName) \(weekDay) \(year)"
     }
 }
 
@@ -71,6 +71,37 @@ class NepaliDateConverter {
         }
         
         return NepaliDate(year: currentYear, month: currentMonth + 1, day: currentDays + 1, weekDay: weekDayName)
+    }
+    
+    static func toEnglishDate(year: Int, month: Int, day: Int) -> Date? {
+        // Validate inputs roughly
+        guard year >= 2000, month >= 1, month <= 12, day >= 1 else { return nil }
+        
+        var totalDays = 0
+        
+        // Add days for full years
+        for y in 2000..<year {
+            guard let daysInMonths = lookupTable[y] else { return nil }
+            totalDays += daysInMonths.reduce(0, +)
+        }
+        
+        // Add days for full months in current year
+        guard let daysInMonths = lookupTable[year] else { return nil }
+        // Validate month doesn't exceed array (though guard above checks 1-12)
+        
+        for m in 0..<(month - 1) {
+            totalDays += daysInMonths[m]
+        }
+        
+        // Validate day doesn't exceed days in that month
+        if day > daysInMonths[month - 1] {
+            return nil
+        }
+        
+        // Add days in current month
+        totalDays += (day - 1)
+        
+        return Calendar.current.date(byAdding: .day, value: totalDays, to: englishEpoch)
     }
 
     // Lookup Table: BS Year -> [Days in Baisakh, ..., Days in Chaitra]
@@ -156,7 +187,7 @@ class NepaliDateConverter {
         2078: [31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30],
         2079: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30],
         2080: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 30],
-        2081: [31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31],
+        2081: [31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 31],
         2082: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30],
         2083: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30],
         2084: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31],
@@ -167,4 +198,11 @@ class NepaliDateConverter {
         2089: [30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30],
         2090: [30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30]
     ]
+    
+    static func getDaysInMonth(year: Int, month: Int) -> Int {
+        guard let daysInMonths = lookupTable[year], month >= 1, month <= 12 else {
+            return 32 // Fallback to max to avoid blocking, or 30?
+        }
+        return daysInMonths[month - 1]
+    }
 }

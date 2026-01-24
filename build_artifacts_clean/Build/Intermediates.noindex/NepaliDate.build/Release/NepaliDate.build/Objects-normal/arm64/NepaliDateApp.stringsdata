@@ -1,56 +1,5 @@
 {
   "source": "/Users/shishirpokhrel/Desktop/NepaliDate/NepaliDate/NepaliDateApp.swift",
-  "tables": {
-    "Localizable": [
-      {
-        "comment": "",
-        "key": "Check Updates",
-        "location": {
-          "startingColumn": 20,
-          "startingLine": 20
-        }
-      },
-      {
-        "comment": "",
-        "key": "About Author",
-        "location": {
-          "startingColumn": 18,
-          "startingLine": 25
-        }
-      },
-      {
-        "comment": "",
-        "key": "Quit",
-        "location": {
-          "startingColumn": 20,
-          "startingLine": 36
-        }
-      },
-      {
-        "comment": "",
-        "key": "Dev: Shishir Pokhrel",
-        "location": {
-          "startingColumn": 22,
-          "startingLine": 26
-        }
-      },
-      {
-        "comment": "",
-        "key": "Created: Jan 24, 2026",
-        "location": {
-          "startingColumn": 22,
-          "startingLine": 27
-        }
-      },
-      {
-        "comment": "",
-        "key": "LinkedIn Profile",
-        "location": {
-          "startingColumn": 24,
-          "startingLine": 28
-        }
-      }
-    ]
-  },
+  "tables": {},
   "version": 1
 }

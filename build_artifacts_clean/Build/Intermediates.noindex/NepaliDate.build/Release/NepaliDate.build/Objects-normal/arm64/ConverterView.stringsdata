@@ -1,0 +1,72 @@
+{
+  "source": "/Users/shishirpokhrel/Desktop/NepaliDate/NepaliDate/ConverterView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Mode",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 22
+        }
+      },
+      {
+        "comment": "",
+        "key": "Close",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 85
+        }
+      },
+      {
+        "comment": "",
+        "key": "AD to BS",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 23
+        }
+      },
+      {
+        "comment": "",
+        "key": "BS to AD",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 24
+        }
+      },
+      {
+        "comment": "",
+        "key": "Enter English Date (AD)",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 34
+        }
+      },
+      {
+        "comment": "",
+        "key": "Convert",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 43
+        }
+      },
+      {
+        "comment": "",
+        "key": "Enter Nepali Date (BS)",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 59
+        }
+      },
+      {
+        "comment": "",
+        "key": "Convert",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 68
+        }
+      }
+    ]
+  },
+  "version": 1
+}

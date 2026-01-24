@@ -35,17 +35,20 @@ echo "Configuring Info.plist..."
 plutil -replace LSUIElement -bool YES "$APP_PATH/Contents/Info.plist"
 
 echo "Cleaning built app attributes and signing ad-hoc..."
-xattr -rc "$APP_PATH"
+find "$APP_PATH" -exec xattr -c {} +
 codesign --force --deep --sign - "$APP_PATH"
-
 echo "Creating Package..."
 # Create the package
 pkgbuild --install-location /Applications --component "$APP_PATH" "$PKG_NAME"
 
 echo "Copying App to Desktop for easy access..."
+rm -rf "/Users/shishirpokhrel/Desktop/$APP_NAME.app"
 cp -R "$APP_PATH" "/Users/shishirpokhrel/Desktop/$APP_NAME.app"
 
 echo "------------------------------------------------"
 echo "Package created successfully: $PWD/$PKG_NAME"
 echo "App copied to Desktop: /Users/shishirpokhrel/Desktop/$APP_NAME.app"
 echo "------------------------------------------------"
+
+echo "Launching the app from Desktop..."
+open "/Users/shishirpokhrel/Desktop/$APP_NAME.app"
