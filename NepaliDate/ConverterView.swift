@@ -4,9 +4,9 @@ struct ConverterView: View {
     @State private var conversionMode = 0 // 0: AD to BS, 1: BS to AD
     
     // AD to BS State
-    @State private var adYear: Int = Calendar.current.component(.year, from: Date())
-    @State private var adMonth: Int = Calendar.current.component(.month, from: Date())
-    @State private var adDay: Int = Calendar.current.component(.day, from: Date())
+    @State private var adYear: Int = 2026
+    @State private var adMonth: Int = 1
+    @State private var adDay: Int = 1
     @State private var convertedBsDateStr: String = ""
     
     // BS to AD State
@@ -42,7 +42,7 @@ struct ConverterView: View {
                     
                     Button("Convert") {
                         let components = DateComponents(year: adYear, month: adMonth, day: adDay)
-                        if let date = Calendar.current.date(from: components) {
+                        if let date = NepaliDateConverter.gregorian.date(from: components) {
                             let bsDate = NepaliDateConverter.toNepaliDate(from: date)
                             convertedBsDateStr = bsDate.formatted
                         } else {
@@ -90,11 +90,15 @@ struct ConverterView: View {
         .frame(width: 400, height: 400)
         .onAppear {
             // Reset to current date every time view appears
-            if conversionMode == 0 {
-                 let now = Date()
-                 adYear = Calendar.current.component(.year, from: now)
-                 adMonth = Calendar.current.component(.month, from: now)
-                 adDay = Calendar.current.component(.day, from: now)
+            let now = Date()
+            adYear = NepaliDateConverter.gregorian.component(.year, from: now)
+            adMonth = NepaliDateConverter.gregorian.component(.month, from: now)
+            adDay = NepaliDateConverter.gregorian.component(.day, from: now)
+            
+            // Auto convert on appear if strings are empty?
+            if convertedBsDateStr.isEmpty {
+                 let bsDate = NepaliDateConverter.toNepaliDate(from: now)
+                 convertedBsDateStr = bsDate.formatted
             }
         }
     }

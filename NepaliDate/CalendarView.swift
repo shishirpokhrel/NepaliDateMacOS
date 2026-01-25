@@ -6,26 +6,21 @@ struct CalendarView: View {
     @State var selectedDay: Int = 1
     
     let initialDate: NepaliDate
+    var onClose: (() -> Void)? = nil
     
-    init(bsDate: NepaliDate) {
+    init(bsDate: NepaliDate, onClose: (() -> Void)? = nil) {
         self.initialDate = bsDate
+        self.onClose = onClose
     }
     
     // Grid layout
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
     let weekDays = ["आ", "सो", "मं", "बु", "बि", "शु", "श"]
     
-    // Helper to convert to Devanagari
-    func toDevanagari(_ number: Int) -> String {
-        let formatter = NumberFormatter()
-        formatter.locale = Locale(identifier: "ne_NP")
-        return formatter.string(from: NSNumber(value: number)) ?? "\(number)"
-    }
-    
     // Helper for English Month Range
     var englishMonthRange: String {
         let startAd = NepaliDateConverter.toEnglishDate(year: currentYear, month: currentMonth, day: 1) ?? Date()
-        let endAd = Calendar.current.date(byAdding: .day, value: 25, to: startAd)!
+        let endAd = NepaliDateConverter.gregorian.date(byAdding: .day, value: 25, to: startAd) ?? startAd
         
         let fmt = DateFormatter()
         fmt.dateFormat = "MMM"
@@ -43,14 +38,7 @@ struct CalendarView: View {
     }
     
     var monthName: String {
-        let months = [
-            "Baisakh", "Jestha", "Asar", "Shrawan", "Bhadra", "Aswin",
-            "Kartik", "Mangsir", "Poush", "Magh", "Falgun", "Chaitra"
-        ]
-        if currentMonth >= 1 && currentMonth <= 12 {
-            return months[currentMonth - 1]
-        }
-        return ""
+        return NepaliDateConverter.bsMonths[currentMonth - 1]
     }
     
     func changeMonth(by value: Int) {
@@ -90,7 +78,7 @@ struct CalendarView: View {
                 Spacer()
                 
                 VStack(spacing: 0) {
-                     Text("\(monthName) \(toDevanagari(currentYear))")
+                     Text("\(monthName) \(NepaliDateConverter.toDevanagari(currentYear))")
                         .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(Color(red: 0.4, green: 0.8, blue: 0.2))
@@ -125,9 +113,9 @@ struct CalendarView: View {
             LazyVGrid(columns: columns, spacing: 0) {
                 let daysInMonth = NepaliDateConverter.getDaysInMonth(year: currentYear, month: currentMonth)
                 let startAdDate = NepaliDateConverter.toEnglishDate(year: currentYear, month: currentMonth, day: 1) ?? Date()
-                let startWeekday = Calendar.current.component(.weekday, from: startAdDate)
+                let startWeekday = NepaliDateConverter.gregorian.component(.weekday, from: startAdDate)
                 
-                // Empty slots - Fix ID conflict by using unique string IDs
+                // Empty slots
                 ForEach(0..<(startWeekday - 1), id: \.self) { index in
                     Text("")
                         .id("empty_\(index)")
@@ -135,16 +123,16 @@ struct CalendarView: View {
                 
                 // Days
                 ForEach(1...daysInMonth, id: \.self) { day in
-                    let currentAdDate = Calendar.current.date(byAdding: .day, value: day - 1, to: startAdDate)!
-                    let adDay = Calendar.current.component(.day, from: currentAdDate)
-                    let weekday = Calendar.current.component(.weekday, from: currentAdDate)
+                    let currentAdDate = NepaliDateConverter.gregorian.date(byAdding: .day, value: day - 1, to: startAdDate) ?? startAdDate
+                    let adDay = NepaliDateConverter.gregorian.component(.day, from: currentAdDate)
+                    let weekday = NepaliDateConverter.gregorian.component(.weekday, from: currentAdDate)
                     let isSaturday = weekday == 7
                     
                     // Highlighting: Check against ACTUAL today, not just initial state
                     let isToday = (day == selectedDay && currentMonth == initialDate.month && currentYear == initialDate.year)
                     
                     VStack(spacing: -2) {
-                        Text(toDevanagari(day))
+                        Text(NepaliDateConverter.toDevanagari(day))
                             .font(.title3)
                             .fontWeight(.medium)
                             .foregroundColor(isSaturday ? .red : .primary)
@@ -160,7 +148,7 @@ struct CalendarView: View {
                     )
                     .overlay(
                         isToday ? VStack(spacing: -2) {
-                             Text(toDevanagari(day))
+                             Text(NepaliDateConverter.toDevanagari(day))
                                  .font(.title3)
                                  .fontWeight(.medium)
                                  .foregroundColor(.white)
@@ -181,6 +169,16 @@ struct CalendarView: View {
             currentYear = initialDate.year
             currentMonth = initialDate.month
             selectedDay = initialDate.day
+        }
+        .onHover { isHovering in
+            if !isHovering {
+                // Buffer to prevent accidental closure
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    // Check if still not hovering before closing? 
+                    // Simple approach for now.
+                    onClose?()
+                }
+            }
         }
     }
 }

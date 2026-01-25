@@ -36,11 +36,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Observe system day change (Midnight)
         NotificationCenter.default.addObserver(self, selector: #selector(dayChanged), name: .NSCalendarDayChanged, object: nil)
+        // Observe manual system clock change
+        NotificationCenter.default.addObserver(self, selector: #selector(dayChanged), name: .NSSystemClockDidChange, object: nil)
+        // Observe timezone change
+        NotificationCenter.default.addObserver(self, selector: #selector(dayChanged), name: .NSSystemTimeZoneDidChange, object: nil)
     }
     
     @objc func dayChanged(_ notification: Notification) {
-        // On midnight, reset everything including the view
-        resetToToday()
+        // Ensure UI updates are on the main thread as these notifications can come from background threads
+        DispatchQueue.main.async { [weak self] in
+            self?.resetToToday()
+        }
     }
 
     
@@ -56,7 +62,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         updateDateTitle()
         // Reset popover content to today
         let bsDate = NepaliDateConverter.toNepaliDate(from: Date())
-        popover.contentViewController = NSHostingController(rootView: CalendarView(bsDate: bsDate))
+        popover.contentViewController = NSHostingController(rootView: CalendarView(bsDate: bsDate, onClose: { [weak self] in
+            self?.popover.performClose(nil)
+        }))
     }
     
     @objc func statusBarButtonClicked(_ sender: NSStatusBarButton) {
@@ -75,6 +83,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if popover.isShown {
             popover.performClose(sender)
         } else {
+            // Always reset to today when opening
+            resetToToday()
             if let button = statusItem.button {
                 popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
             }
@@ -108,16 +118,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Explicitly set target for items handled by AppDelegate
         menu.items.forEach { $0.target = self }
         
-        statusItem.menu = menu // Temporarily assign menu to show it? 
-        // Better way for instant popup:
-        statusItem.button?.performClick(nil) // This might trigger action again if menu is set.
-        // Actually best way for one-off menu:
+        // Use popUpMenu to show it immediately at the status item position
         statusItem.menu = menu
         statusItem.button?.performClick(nil)
-        statusItem.menu = nil // Clear it back so left click works next time?
-        // Wait, if I assign menu, left click opens menu.
-        // If I want Right Click -> Menu, I should probably use `NSMenu.popUpContextMenu`.
-        NSMenu.popUpContextMenu(menu, with: NSApp.currentEvent!, for: sender)
+        statusItem.menu = nil
     }
     
     @objc func openConverter() {

@@ -7,12 +7,7 @@ struct NepaliDate {
     var weekDay: String // Nepali short day name
     
     var monthName: String {
-        let months = [
-            "Baisakh", "Jestha", "Asar", "Shrawan", "Bhadra", "Aswin",
-            "Kartik", "Mangsir", "Poush", "Magh", "Falgun", "Chaitra"
-        ]
-        guard month >= 1 && month <= 12 else { return "" }
-        return months[month - 1]
+        return NepaliDateConverter.bsMonths[month - 1]
     }
     
     var formatted: String {
@@ -22,18 +17,31 @@ struct NepaliDate {
 
 class NepaliDateConverter {
     
-    // Epoch calibrated to Leapfrog data: 1 Baisakh 2000 BS = 14 April 1943 AD
-    private static let englishEpoch = Calendar.current.date(from: DateComponents(year: 1943, month: 4, day: 14))!
+    // Use a fixed Gregorian calendar for internal logic to avoid issues with user's system settings
+    static let gregorian = Calendar(identifier: .gregorian)
+    
+    static let bsMonths = [
+        "Baisakh", "Jestha", "Asar", "Shrawan", "Bhadra", "Aswin",
+        "Kartik", "Mangsir", "Poush", "Magh", "Falgun", "Chaitra"
+    ]
     
     private static let nepaliDays = ["आइत", "सोम", "मंगल", "बुध", "बिहि", "शुक्र", "शनि"]
+
+    // Epoch calibrated to Leapfrog data: 1 Baisakh 2000 BS = 14 April 1943 AD
+    private static let englishEpoch: Date = {
+        var components = DateComponents()
+        components.year = 1943
+        components.month = 4
+        components.day = 14
+        return gregorian.date(from: components)!
+    }()
     
     static func toNepaliDate(from date: Date) -> NepaliDate {
-        let calendar = Calendar.current
-        let startOfEpoch = calendar.startOfDay(for: englishEpoch)
-        let startOfTarget = calendar.startOfDay(for: date)
-        let daysPassed = calendar.dateComponents([.day], from: startOfEpoch, to: startOfTarget).day ?? 0
+        let startOfEpoch = gregorian.startOfDay(for: englishEpoch)
+        let startOfTarget = gregorian.startOfDay(for: date)
+        let daysPassed = gregorian.dateComponents([.day], from: startOfEpoch, to: startOfTarget).day ?? 0
         
-        let weekdayIndex = calendar.component(.weekday, from: date) 
+        let weekdayIndex = gregorian.component(.weekday, from: date) 
         let weekDayName = nepaliDays[weekdayIndex - 1]
         
         var currentDays = daysPassed
@@ -93,7 +101,7 @@ class NepaliDateConverter {
         
         totalDays += (day - 1)
         
-        return Calendar.current.date(byAdding: .day, value: totalDays, to: englishEpoch)
+        return gregorian.date(byAdding: .day, value: totalDays, to: englishEpoch)
     }
 
     // Lookup Table: BS Year -> [Days in Baisakh, ..., Days in Chaitra]
@@ -197,5 +205,11 @@ class NepaliDateConverter {
             return 32 // Fallback
         }
         return daysInMonths[month - 1]
+    }
+    
+    static func toDevanagari(_ number: Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "ne_NP")
+        return formatter.string(from: NSNumber(value: number)) ?? "\(number)"
     }
 }
