@@ -14,8 +14,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         
         if let button = statusItem.button {
-            button.image = NSImage(systemSymbolName: "calendar", accessibilityDescription: "Nepali Date")
-            button.title = NepaliDateConverter.toNepaliDate(from: Date()).formatted
+            button.image = nil
+            button.toolTip = "Nepali Date"
             // Use monospaced digit font if possible, or keep standard
             button.action = #selector(statusBarButtonClicked(_:))
             // Listen for both left and right clicks
@@ -53,7 +53,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func updateDateTitle() {
         if let button = statusItem.button {
             let bsDate = NepaliDateConverter.toNepaliDate(from: Date())
-            button.title = bsDate.formatted
+            button.title = bsDate.statusBarFormatted
+            statusItem.length = NSStatusItem.variableLength
             // Do NOT reset popover here, as it kills user navigation
         }
     }

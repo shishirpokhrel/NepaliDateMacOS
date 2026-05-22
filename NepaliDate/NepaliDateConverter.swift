@@ -13,6 +13,10 @@ struct NepaliDate {
     var formatted: String {
         return "\(day) \(monthName) \(weekDay) \(year)"
     }
+
+    var statusBarFormatted: String {
+        return "\(day) \(monthName) \(year)"
+    }
 }
 
 class NepaliDateConverter {

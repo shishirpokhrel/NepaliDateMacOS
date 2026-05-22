@@ -16,6 +16,14 @@ struct CalendarView: View {
     // Grid layout
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
     let weekDays = ["आ", "सो", "मं", "बु", "बि", "शु", "श"]
+
+    func isWeekendHeader(index: Int) -> Bool {
+        index == 0 || index == 6
+    }
+
+    func isWeekend(weekday: Int) -> Bool {
+        weekday == 1 || weekday == 7
+    }
     
     // Helper for English Month Range
     var englishMonthRange: String {
@@ -104,7 +112,7 @@ struct CalendarView: View {
                 ForEach(Array(weekDays.enumerated()), id: \.offset) { index, day in
                     Text(day)
                         .font(.body)
-                        .foregroundColor(index == 6 ? .red : .primary)
+                        .foregroundColor(isWeekendHeader(index: index) ? .red : .primary)
                 }
             }
             .padding(.horizontal)
@@ -126,7 +134,7 @@ struct CalendarView: View {
                     let currentAdDate = NepaliDateConverter.gregorian.date(byAdding: .day, value: day - 1, to: startAdDate) ?? startAdDate
                     let adDay = NepaliDateConverter.gregorian.component(.day, from: currentAdDate)
                     let weekday = NepaliDateConverter.gregorian.component(.weekday, from: currentAdDate)
-                    let isSaturday = weekday == 7
+                    let isWeekendDay = isWeekend(weekday: weekday)
                     
                     // Highlighting: Check against ACTUAL today, not just initial state
                     let isToday = (day == selectedDay && currentMonth == initialDate.month && currentYear == initialDate.year)
@@ -135,7 +143,7 @@ struct CalendarView: View {
                         Text(NepaliDateConverter.toDevanagari(day))
                             .font(.title3)
                             .fontWeight(.medium)
-                            .foregroundColor(isSaturday ? .red : .primary)
+                            .foregroundColor(isWeekendDay ? .red : .primary)
                         
                         Text("\(adDay)")
                             .font(.caption2)
