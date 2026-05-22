@@ -1,0 +1,72 @@
+{
+  "buildCommand" : {
+    "command" : "build",
+    "skipDependencies" : false,
+    "style" : "buildAndRun"
+  },
+  "configuredTargets" : [
+    {
+      "guid" : "99240a2a60c5a24dea2ec0415091a7a92b89e4c63a168f5570c256db643b4e8c"
+    },
+    {
+      "guid" : "99240a2a60c5a24dea2ec0415091a7a9ba49b9b31cbb050683874596f419a4ae"
+    },
+    {
+      "guid" : "99240a2a60c5a24dea2ec0415091a7a99a1bb5ee12dd30ab247eee63efa52112"
+    }
+  ],
+  "containerPath" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/NepaliDate.xcodeproj",
+  "continueBuildingAfterErrors" : false,
+  "dependencyScope" : "workspace",
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "activeArchitecture" : "arm64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "hostTargetedPlatform" : null,
+      "platform" : "macosx",
+      "sdk" : "macosx26.5",
+      "sdkVariant" : "macos",
+      "supportedArchitectures" : [
+        "arm64e",
+        "arm64",
+        "x86_64"
+      ],
+      "targetArchitecture" : "arm64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_test/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_test/Build/Products",
+      "derivedDataPath" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_test",
+      "indexDataStoreFolderPath" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_test/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_test/Index.noindex/PrecompiledHeaders",
+      "pchPath" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_test/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "commandLine" : {
+        "table" : {
+          "CODE_SIGNING_ALLOWED" : "NO"
+        }
+      },
+      "synthesized" : {
+        "table" : {
+          "CLANG_COVERAGE_MAPPING" : "YES",
+          "CLANG_PROFILE_DATA_DIRECTORY" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_test/Build/ProfileData",
+          "ENABLE_PREVIEWS" : "NO",
+          "ENABLE_XOJIT_PREVIEWS" : "YES",
+          "ONLY_ACTIVE_ARCH" : "YES"
+        }
+      }
+    }
+  },
+  "schemeCommand" : "test",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}

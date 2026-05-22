@@ -1,0 +1,46 @@
+{
+  "" : {
+    "const-values" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/NepaliDate-primary.swiftconstvalues",
+    "dependencies" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/NepaliDate-primary.d",
+    "diagnostics" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/NepaliDate-primary.dia",
+    "emit-module-dependencies" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/NepaliDate-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/NepaliDate-primary-emit-module.dia",
+    "pch" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/NepaliDate-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/NepaliDate-primary.swiftdeps"
+  },
+  "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/NepaliDate/AppDelegate.swift" : {
+    "index-unit-output-path" : "/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/AppDelegate.o",
+    "llvm-bc" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/AppDelegate.bc",
+    "object" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/AppDelegate.o"
+  },
+  "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/NepaliDate/CalendarView.swift" : {
+    "index-unit-output-path" : "/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/CalendarView.o",
+    "llvm-bc" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/CalendarView.bc",
+    "object" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/CalendarView.o"
+  },
+  "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/NepaliDate/ContentView.swift" : {
+    "index-unit-output-path" : "/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/ContentView.o",
+    "llvm-bc" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/ContentView.bc",
+    "object" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/ContentView.o"
+  },
+  "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/NepaliDate/ConverterView.swift" : {
+    "index-unit-output-path" : "/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/ConverterView.o",
+    "llvm-bc" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/ConverterView.bc",
+    "object" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/ConverterView.o"
+  },
+  "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/NepaliDate/NepaliDateApp.swift" : {
+    "index-unit-output-path" : "/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/NepaliDateApp.o",
+    "llvm-bc" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/NepaliDateApp.bc",
+    "object" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/NepaliDateApp.o"
+  },
+  "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/NepaliDate/NepaliDateConverter.swift" : {
+    "index-unit-output-path" : "/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/NepaliDateConverter.o",
+    "llvm-bc" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/NepaliDateConverter.bc",
+    "object" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/NepaliDateConverter.o"
+  },
+  "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "index-unit-output-path" : "/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/x86_64/GeneratedAssetSymbols.o"
+  }
+}

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>12</integer>
+	<key>logs</key>
+	<dict>
+		<key>755EA3C3-C57D-4020-8A1B-840EA65F9D5F</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>755EA3C3-C57D-4020-8A1B-840EA65F9D5F.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>29</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>NepaliDate project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>NepaliDate</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Testing project NepaliDate with scheme NepaliDate</string>
+			<key>timeStartedRecording</key>
+			<real>801116498.17544305</real>
+			<key>timeStoppedRecording</key>
+			<real>801116505.12754798</real>
+			<key>title</key>
+			<string>Testing project NepaliDate with scheme NepaliDate</string>
+			<key>uniqueIdentifier</key>
+			<string>755EA3C3-C57D-4020-8A1B-840EA65F9D5F</string>
+		</dict>
+		<key>AB56F4B6-A8C9-4091-9166-383ADCFCD15C</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>AB56F4B6-A8C9-4091-9166-383ADCFCD15C.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>29</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>NepaliDate project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>NepaliDate</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Testing project NepaliDate with scheme NepaliDate</string>
+			<key>timeStartedRecording</key>
+			<real>801117790.35145903</real>
+			<key>timeStoppedRecording</key>
+			<real>801117797.22163403</real>
+			<key>title</key>
+			<string>Testing project NepaliDate with scheme NepaliDate</string>
+			<key>uniqueIdentifier</key>
+			<string>AB56F4B6-A8C9-4091-9166-383ADCFCD15C</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>FormatVersion</key>
+	<integer>1</integer>
+	<key>Store</key>
+	<dict>
+		<key>NepaliDateTests</key>
+		<dict>
+			<key>NepaliDateTests</key>
+			<dict>
+				<key>checkEpoch</key>
+				<dict>
+					<key>mrnet</key>
+					<real>0.0020639896392822266</real>
+				</dict>
+				<key>checkToday</key>
+				<dict>
+					<key>mrnet</key>
+					<real>0.0021049976348876953</real>
+				</dict>
+				<key>testRandomDates</key>
+				<dict>
+					<key>mrnet</key>
+					<real>0.0042440891265869141</real>
+				</dict>
+			</dict>
+		</dict>
+	</dict>
+</dict>
+</plist>

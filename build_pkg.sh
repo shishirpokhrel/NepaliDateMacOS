@@ -5,6 +5,8 @@ APP_NAME="NepaliDate"
 SCHEME="NepaliDate"
 BUILD_DIR="build_artifacts_clean"
 PKG_NAME="NepaliDate.pkg"
+APP_COPY_DIR="$PWD/dist"
+SCRIPTS_DIR="$PWD/scripts"
 
 echo "Cleaning previous build..."
 rm -rf "$BUILD_DIR"
@@ -14,11 +16,11 @@ echo "Cleaning extended attributes (skipping .git and build artifacts)..."
 find . -type f -not -path "./.git/*" -not -path "./build_artifacts*" -exec xattr -c {} +
 
 echo "Building $APP_NAME..."
-# Build for Release
 xcodebuild -scheme "$SCHEME" \
-    -destination 'platform=macOS,arch=arm64' \
+    -destination 'generic/platform=macOS' \
     -configuration Release \
     -derivedDataPath "$BUILD_DIR" \
+    SDKROOT=macosx \
     CODE_SIGN_IDENTITY="" \
     CODE_SIGNING_REQUIRED=NO \
     CODE_SIGNING_ALLOWED=NO \
@@ -38,17 +40,14 @@ echo "Cleaning built app attributes and signing ad-hoc..."
 find "$APP_PATH" -exec xattr -c {} +
 codesign --force --deep --sign - "$APP_PATH"
 echo "Creating Package..."
-# Create the package
-pkgbuild --install-location /Applications --component "$APP_PATH" "$PKG_NAME"
+pkgbuild --install-location /Applications --component "$APP_PATH" --scripts "$SCRIPTS_DIR" "$PKG_NAME"
 
-echo "Copying App to Desktop for easy access..."
-rm -rf "/Users/shishirpokhrel/Desktop/$APP_NAME.app"
-cp -R "$APP_PATH" "/Users/shishirpokhrel/Desktop/$APP_NAME.app"
+echo "Copying App to dist for easy access..."
+rm -rf "$APP_COPY_DIR"
+mkdir -p "$APP_COPY_DIR"
+cp -R "$APP_PATH" "$APP_COPY_DIR/$APP_NAME.app"
 
 echo "------------------------------------------------"
 echo "Package created successfully: $PWD/$PKG_NAME"
-echo "App copied to Desktop: /Users/shishirpokhrel/Desktop/$APP_NAME.app"
+echo "App copied to: $APP_COPY_DIR/$APP_NAME.app"
 echo "------------------------------------------------"
-
-echo "Launching the app from Desktop..."
-open "/Users/shishirpokhrel/Desktop/$APP_NAME.app"

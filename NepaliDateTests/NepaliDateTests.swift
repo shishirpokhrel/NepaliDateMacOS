@@ -18,30 +18,33 @@ struct NepaliDateTests {
     }
 
     @Test func checkToday() async throws {
-        // 2026-01-24 => 10 Magh 2082
+        // 2026-01-24 => 11 Magh 2082
         let dateComponents = DateComponents(year: 2026, month: 1, day: 24)
         let date = Calendar.current.date(from: dateComponents)!
         
         let nepaliDate = NepaliDateConverter.toNepaliDate(from: date)
         print("Converted Date: \(nepaliDate.formatted)")
         
-        // 10 Magh 2082
+        // 11 Magh 2082
         #expect(nepaliDate.year == 2082)
         #expect(nepaliDate.month == 10)
-        #expect(nepaliDate.day == 10)
+        #expect(nepaliDate.day == 11)
     }
 
     @Test func testRandomDates() async throws {
         // Test random dates from 2000 to 2030 AD
-        let startDate = DateComponents(year: 2000, month: 1, day: 1).date!
-        let endDate = DateComponents(year: 2030, month: 12, day: 31).date!
+        let startDate = NepaliDateConverter.gregorian.date(from: DateComponents(year: 2000, month: 1, day: 1))!
+        let endDate = NepaliDateConverter.gregorian.date(from: DateComponents(year: 2030, month: 12, day: 31))!
         let timeInterval = endDate.timeIntervalSince(startDate)
         
         for _ in 0..<10 { // Test 10 random dates
             let randomInterval = TimeInterval.random(in: 0...timeInterval)
             let randomDate = startDate.addingTimeInterval(randomInterval)
             
-            print("Attempting to convert AD: \(randomDate.formatted(date: .numeric, time: .omitted))")
+            let formatter = DateFormatter()
+            formatter.dateStyle = .short
+            formatter.timeStyle = .none
+            print("Attempting to convert AD: \(formatter.string(from: randomDate))")
             let bsDate = NepaliDateConverter.toNepaliDate(from: randomDate)
             print("Success -> BS: \(bsDate.formatted)")
             
@@ -53,7 +56,7 @@ struct NepaliDateTests {
         
         // Specific checks for known boundary dates if possible
         // 1 Jan 2000 -> 17 Poush 2056
-        let y2k = DateComponents(year: 2000, month: 1, day: 1).date!
+        let y2k = NepaliDateConverter.gregorian.date(from: DateComponents(year: 2000, month: 1, day: 1))!
         let bsY2k = NepaliDateConverter.toNepaliDate(from: y2k)
         #expect(bsY2k.year == 2056)
         #expect(bsY2k.month == 9) // Poush

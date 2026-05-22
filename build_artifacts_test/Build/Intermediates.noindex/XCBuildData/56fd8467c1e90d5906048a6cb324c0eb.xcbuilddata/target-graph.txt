@@ -1,0 +1,6 @@
+Target dependency graph (3 targets)
+Target 'NepaliDateUITests' in project 'NepaliDate'
+➜ Explicit dependency on target 'NepaliDate' in project 'NepaliDate'
+Target 'NepaliDateTests' in project 'NepaliDate'
+➜ Explicit dependency on target 'NepaliDate' in project 'NepaliDate'
+Target 'NepaliDate' in project 'NepaliDate' (no dependencies)

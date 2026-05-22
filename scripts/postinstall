@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+APP_PATH="/Applications/NepaliDate.app"
+CONSOLE_USER="$(stat -f "%Su" /dev/console)"
+CONSOLE_UID="$(stat -f "%u" /dev/console)"
+
+if [ ! -d "$APP_PATH" ] || [ "$CONSOLE_USER" = "root" ] || [ -z "$CONSOLE_UID" ]; then
+    exit 0
+fi
+
+launchctl asuser "$CONSOLE_UID" /usr/bin/open "$APP_PATH" || true
+
+exit 0

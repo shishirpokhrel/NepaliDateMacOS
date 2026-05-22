@@ -1,0 +1,19 @@
+{
+  "" : {
+    "diagnostics" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_test/Build/Intermediates.noindex/NepaliDate.build/Debug/NepaliDateTests.build/Objects-normal/arm64/NepaliDateTests-primary.dia",
+    "emit-module-dependencies" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_test/Build/Intermediates.noindex/NepaliDate.build/Debug/NepaliDateTests.build/Objects-normal/arm64/NepaliDateTests-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_test/Build/Intermediates.noindex/NepaliDate.build/Debug/NepaliDateTests.build/Objects-normal/arm64/NepaliDateTests-primary-emit-module.dia",
+    "pch" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_test/Build/Intermediates.noindex/NepaliDate.build/Debug/NepaliDateTests.build/Objects-normal/arm64/NepaliDateTests-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_test/Build/Intermediates.noindex/NepaliDate.build/Debug/NepaliDateTests.build/Objects-normal/arm64/NepaliDateTests-primary.swiftdeps"
+  },
+  "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/NepaliDateTests/NepaliDateTests.swift" : {
+    "const-values" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_test/Build/Intermediates.noindex/NepaliDate.build/Debug/NepaliDateTests.build/Objects-normal/arm64/NepaliDateTests.swiftconstvalues",
+    "dependencies" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_test/Build/Intermediates.noindex/NepaliDate.build/Debug/NepaliDateTests.build/Objects-normal/arm64/NepaliDateTests.d",
+    "diagnostics" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_test/Build/Intermediates.noindex/NepaliDate.build/Debug/NepaliDateTests.build/Objects-normal/arm64/NepaliDateTests.dia",
+    "index-unit-output-path" : "/NepaliDate.build/Debug/NepaliDateTests.build/Objects-normal/arm64/NepaliDateTests.o",
+    "llvm-bc" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_test/Build/Intermediates.noindex/NepaliDate.build/Debug/NepaliDateTests.build/Objects-normal/arm64/NepaliDateTests.bc",
+    "object" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_test/Build/Intermediates.noindex/NepaliDate.build/Debug/NepaliDateTests.build/Objects-normal/arm64/NepaliDateTests.o",
+    "swift-dependencies" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_test/Build/Intermediates.noindex/NepaliDate.build/Debug/NepaliDateTests.build/Objects-normal/arm64/NepaliDateTests.swiftdeps",
+    "swiftmodule" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_test/Build/Intermediates.noindex/NepaliDate.build/Debug/NepaliDateTests.build/Objects-normal/arm64/NepaliDateTests~partial.swiftmodule"
+  }
+}

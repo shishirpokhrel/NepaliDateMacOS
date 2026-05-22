@@ -1,0 +1,12 @@
+{
+  "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/NepaliDate/AppDelegate.swift" : {
+    "abi-baseline-json" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/NepaliDate.abi.json",
+    "const-values" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/NepaliDate-primary.swiftconstvalues",
+    "dependencies" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/NepaliDate-primary.d",
+    "diagnostics" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/NepaliDate-primary.dia",
+    "objc-header" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/NepaliDate-Swift.h",
+    "swiftdoc" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/NepaliDate.swiftdoc",
+    "swiftmodule" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/NepaliDate.swiftmodule",
+    "swiftsourceinfo" : "/Users/shishirpokhrelengineering/Desktop/NepaliDateMacOS/build_artifacts_clean/Build/Intermediates.noindex/NepaliDate.build/Release/NepaliDate.build/Objects-normal/arm64/NepaliDate.swiftsourceinfo"
+  }
+}
